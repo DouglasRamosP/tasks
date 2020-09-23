@@ -1,0 +1,19 @@
+{
+    "name": "douglas/tasks",
+    "description": "Projeto Web",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Douglas Pimenta",
+            "email": "douglas.pimenta@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "App",
+            "UNIS\\" : "vendor/UNIS"
+        }
+    }
+}
