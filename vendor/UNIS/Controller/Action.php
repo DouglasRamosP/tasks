@@ -44,5 +44,6 @@ class Action
     public function redirect()
     {
 
-    }
+	}
+	
 }
