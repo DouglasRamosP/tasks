@@ -7,6 +7,8 @@ class Action
 	protected $view;
 	protected $action;
 	protected $stdLayout;
+    const URL_WITH_PARAM = 3;
+    const URL_PARAM = 2;
 
 	public function __construct()
 	{
@@ -38,12 +40,19 @@ class Action
 
     public function getParam()
     {
+        $url = explode('/', $_SERVER['REQUEST_URI']);
+        
+        if (count($url) < self::URL_WITH_PARAM 
+            || empty($url[self::URL_PARAM])) {
+            
+            return null;
+        }
 
+        return $url[self::URL_PARAM];
     }
 
-    public function redirect()
+    public function redirect($route = '/')
     {
-
-	}
-	
+        header("Location: {$route}");
+    }
 }

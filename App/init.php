@@ -14,12 +14,42 @@ class Init extends Bootstrap
 	       'action' => 'index'
 	    ];
 
+	    $taskRoutes['index'] = [
+	       'route' => '/index',
+	       'controller' => 'index',
+	       'action' => 'index'
+	    ];
+
 	    $taskRoutes['add'] = [
 	       'route' => '/add',
 	       'controller' => 'index',
 	       'action' => 'add'	
-	    ];
+		];
+		
+		$taskRoutes['edit'] = [
+            'route' => '/edit',
+            'controller' => 'index',
+            'action' => 'edit'	
+         ];
+
+
+         $taskRoutes['delete'] = [
+            'route' => '/delete',
+            'controller' => 'index',
+            'action' => 'delete'	
+         ];
 
 	    $this->setRoutes($taskRoutes);
+	}
+
+	public static function getDb()
+	{
+		$db = new \PDO (
+			"mysql:host=localhost;dbname=tasks", 
+			"root", 
+			""
+		);
+		
+		return $db;
 	}
 }
