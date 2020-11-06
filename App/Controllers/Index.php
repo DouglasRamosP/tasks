@@ -5,6 +5,7 @@ namespace App\Controllers;
 use UNIS\Controller\Action;
 use UNIS\Di\Container;
 use App\Models\TaskResult;
+use App\Models\TaskFormat;
 
 class Index extends Action
 {
@@ -23,7 +24,7 @@ class Index extends Action
 		}
 
 		$this->view->taskList = $this->task->fetchAll();
-		//formatar os dados das tarefas.
+		TaskFormat::taskListFormat($this->view->taskList);
 		
 		$this->render('index');
 	}
@@ -38,19 +39,16 @@ class Index extends Action
 		$this->redirect("/index/{$addResult}");
 	}
 
-	public function delete()
+	public function edit()
 	{
 		
-		$deleteResult = TaskResult::DELETE_OK;
-
-		if($this->task->delete($_POST) !== true)
-		{
-			$deleteResult = TaskResult::DELETE_ERROR;
-		};
-
-		$this->redirect("/index/{$deleteResult}");
-
-		//$this->render('delete');
-		//$this->redirect();
+		var_dump($this->getParam());
 	}
+	
+	public function delete()
+	{
+		var_dump($this->getParam());
+	
+	}
+	
 }
