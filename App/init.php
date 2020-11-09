@@ -30,6 +30,12 @@ class Init extends Bootstrap
             'route' => '/edit',
             'controller' => 'index',
             'action' => 'edit'	
+		 ];
+		 
+		 $taskRoutes['update'] = [
+            'route' => '/update',
+            'controller' => 'index',
+            'action' => 'update'	
          ];
 
 

@@ -15,7 +15,7 @@ abstract class Table
 	public function add(array $data)
 	{
 		$columns = array_keys(self::prepareInsert($data));
-		$values = array_values(self::prepareInsert($data));
+        $values = array_values(self::prepareInsert($data));
 	
 		$query = "INSERT INTO {$this->table} (";
 		$query .= implode(', ', $columns);
@@ -44,60 +44,68 @@ abstract class Table
 
 	public function find(int $id)
 	{
-		//busca uma tarefa especifica pelo ID
+		$query = "SELECT * FROM {$this->table} WHERE ID=:id";
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindParam(":id", $id);
+		$stmt->execute();
+
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
 	}
 
 	public function update(array $data, int $id)
 	{
 		//atualiza uma tarefa no banco de dados
-	}
+		$set = self::prepareUpdate($data);
+		$query = "UPDATE {$this->table} SET ";
+		$query .= implode(", ", $set);
+		$query .= " WHERE ID=:id";
 
-	public function delete(int $id)
-	{
-		//apaga uma tarefa no banco de dados
-		$columns = array_keys(self::prepareDelete($data));
-		$values = array_values(self::prepareDelete($data));
-	
-		$query = "DELETE INTO {$this->table} (";
-		$query .= implode(', ', $columns);
-		$query .= ') VALUES (';
-		$query .= implode(', ', $values) . ')';
-		
-        
-        $stmt = $this->db->prepare($query);
-		
-        
-        try {
-			return $stmt->execute();
+		$stmt = $this->db->prepare($query);
+		$stmt->bindParam(":id", $id);
+
+		try {
+			$stmt->execute();
+			return $stmt->rowCount();
 		} catch (\PDOException $e) {
 			return $e->getMessage();
-		} 
-	
+		}
 	}
 
+	public function delete(array $data)
+    {
+		//apaga uma tarefa no banco
+		$query = "DELETE FROM {$this->table} WHERE id=:id";
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindParam(":ID", $id);
+		$stmt->execute();
+	}
+
+	
 	private function prepareInsert(array $data)
+    {
+        array_pop($data);
+
+        array_walk($data, function(&$value) 
+        {
+            $value = $this->db->quote($value);
+        });
+
+        return $data;
+    }
+
+	private function prepareUpdate(array $data)
 	{
+		$updateSet = [];
+		array_shift($data);
 		array_pop($data);
 
-		array_walk($data, function(&$value) {
-			$value = $this->db->quote($value);
-			
-		});
-		
-		return $data;
+		foreach($data as $key => $value) {
+			array_push($updateSet, "{$key}=" . $this->db->quote($value));
+		}
 
-
-	}
-
-	private function prepareDelete(array $data)
-	{
-		array_splice($data);
-
-        array_walk($data, function(&$value) {
-			$value = $this->db->quote($value);
-		});
-		
-		return $data;
+		return $updateSet;
 	}
 
 }

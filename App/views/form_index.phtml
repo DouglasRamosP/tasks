@@ -1,0 +1,87 @@
+<form method="POST" action="/add">
+
+		<!--Nome/Name-->
+		<input type="text" 
+			name="name" 
+			id="name" 
+			placeholder="Nome do produto" 
+		/>
+		<!--Descricao/Description-->
+		<input type="text" 
+			name="description" 
+			id="description" 
+			placeholder="Descrição do produto" 
+		/>
+		<!--Prazo/Due-->
+		<input type="date" 
+			name="due" 
+			id="due" 
+			placeholder="prazo" 
+		/>
+		<br />
+		<br />
+		<h6><strong>Informe o destino do produto:</strong></h6>
+		<!--Prioridade/Priority-->
+		<input type="radio" name="priority" id="1" value="1" />
+		<label for="low">Depósito 01</label>
+		
+		<input type="radio" name="priority" id="2" value="2" />
+		<label for="medium">Depósito 02</label>
+		
+		<input type="radio" name="priority" id="3" value="3" />
+		<label for="high">Depósito 03</label>
+		<br />
+		<br />
+		
+		<!--Finalizada/Finished-->
+		<h6><strong>Informe se o produto já existe em estoque:</strong></h6>
+		<input type="checkbox" 
+			name="finished" 
+			id="finished" 
+			value="1" 
+		/>
+		<label for="finished">Existente</label>
+		<br />
+		
+		<!--Botão Salvar/Salvar-->
+		<input type="submit" name="save" id="save" value="Salvar" />
+	</form>
+	<br />
+	<br />
+	<h3>VISUALIZE AQUI SEUS PROCESSOS:</h3>
+	<div class="table-responsive">
+		<table class="table table-hover table-sm">
+			<thead class="thead-dark">
+				<tr>
+					<th><scope="row">ID</th>
+					<th>Nome</th>
+					<th>Descrição</th>
+					<th>Data</th>
+					<th>Local</th>
+					<th>Existente</th>
+					<th>Editar</th>
+					<th>Deletar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($this->view->taskList as $taskItem):?>
+					<tr>
+						<td><?=$taskItem['id']?></td>
+						<td><?=$taskItem['name']?></td>
+						<td><?=$taskItem['description']?></td>
+						<td><?=$taskItem['due']?></td>
+						<td><?=$taskItem['priority']?></td>
+						<td><?=$taskItem['finished']?></td>
+						<td>
+							<a href="/edit/<?=$taskItem['id']?>" class="btn btn-warning">Editar</a>
+						</td>
+						<td>
+							<a href="/delete/<?=$taskItem['id']?>" class="btn btn-danger">Deletar</a>
+						</td>
+					
+					</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+	</div>
+</section>

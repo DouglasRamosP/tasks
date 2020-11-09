@@ -1,0 +1,95 @@
+<form method="POST" action="<?=$this->view->form->getAction()?>">
+	<!--ID/id-->
+	<input 
+		type="hidden"
+		id="id"
+		name="id"
+		value="<?=$this->view->taskEdit['id'] ?? '';?>"
+	/>
+	<!--Nome/Name-->
+	<input type="text" 
+		name="name" 
+		id="name" 
+		placeholder="Nome do produto" 
+		value="<?=$this->view->taskEdit['name'] ?? '';?>"
+	/>
+	<br />
+	<!--Descricao/Description-->
+	<input type="text" 
+		name="description" 
+		id="description" 
+		placeholder="Descrição do produto" 
+		value="<?=$this->view->taskEdit['description'] ?? '';?>"
+	/>
+	<br />
+	<!--Prazo/Due-->
+	<input type="date" 
+		name="due" 
+		id="due" 
+		placeholder="Prazo" 
+		value="<?=$this->view->taskEdit['due'] ?? '';?>"
+	/>
+	<br />
+	<!--Prioridade/Priority-->
+	<input 
+		type="radio" 
+		name="priority" 
+		id="1" 
+		value="1" 
+		<?=(isset($this->view->taskEdit) && 
+			$this->view->taskEdit['priority'] == '1') ?
+			'checked' :
+			'';
+		?>
+	/>
+	<label for="1">Deposito 1</label>
+	
+	<input 
+		type="radio" 
+		name="priority" 
+		id="2" 
+		value="2" 
+		<?=(isset($this->view->taskEdit) && 
+			$this->view->taskEdit['priority'] == '2') ?
+			'checked' :
+			'';
+		?>
+	/>
+	<label for="2">Deposito 2</label>
+	
+	<input 
+		type="radio" 
+		name="priority" 
+		id="3" 
+		value="3" 
+		<?=(isset($this->view->taskEdit) && 
+			$this->view->taskEdit['priority'] == '3') ?
+			'checked' :
+			'';
+		?>
+	/>
+	<label for="3">Deposito 3</label>
+	<br />
+	
+	<!--Finalizada/Finished-->
+	<input type="checkbox" 
+		name="finished" 
+		id="finished" 
+		value="1"
+		<?=(isset($this->view->taskEdit) && 
+			$this->view->taskEdit['finished'] == 1) ?
+			'checked' :
+			'';
+		?> 
+	/>
+	<label for="finished">Existente</label>
+	<br />
+	
+	<!--Botão Salvar/Salvar-->
+	<input 
+		type="submit" 
+		name="<?=$this->view->form->getActionButton()?>" 
+		id="<?=$this->view->form->getActionButton()?>" 
+		value="<?=$this->view->form->getActionButtonText()?>" 
+	/>
+</form>

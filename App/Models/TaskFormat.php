@@ -9,6 +9,8 @@ class TaskFormat
         foreach($tasklist as &$task) {
             //altero cada uma das colunas
             self::dateFormat($task['due']);
+            self::priorityFormat($task['priority']);
+			self::finishedFormat($task['complete']);
         }
     }
 
@@ -28,6 +30,30 @@ class TaskFormat
         }
          //opção 2
     }
+
+    public static function priorityFormat(&$priority)
+	{
+		switch ($priority) {
+			case 'low':
+				$priority = '1';
+				break;
+			case 'medium':
+				$priority = '2';
+				break;
+			case 'high':
+				$priority = '3';
+				break;
+		}
+	}
+
+	public static function finishedFormat(&$finished)
+	{
+		if($finished == 1) {
+			$finished = 'Sim';
+		} else {
+			$finished = 'Não';
+		}
+	}
 
     private static function dateEmpty(&$date)
     {
