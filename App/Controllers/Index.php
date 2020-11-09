@@ -79,4 +79,16 @@ class Index extends Action
 	
 	}
 
+	public function edit()
+	{
+		
+		var_dump($this->getParam());
+	}
+	
+	public function delete()
+	{
+		var_dump($this->getParam());
+	
+	}
+	
 }
