@@ -81,12 +81,18 @@ class Index extends Action
 	public function delete()
 	{
 
-		$deleteResult = TaskResult::DELETE_OK;
-		if ($this->task->delete($_POST) !== true) {
-			$deleteResult = TaskResult::DELETE_ERROR;
+		$result = $this->task->delete($this->getParam());
+
+		$deleteResult = TaskResult::DELETE_ERROR;
+		if($result === 1) {
+			$deleteResult = TaskResult::DELETE_OK;
+		}
+		if($result === 0) {
+			$deleteResult = null;
 		}
 
 		$this->redirect("/index/{$deleteResult}");
+
 
 	}
 	

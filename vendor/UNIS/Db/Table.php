@@ -59,7 +59,7 @@ abstract class Table
 		$set = self::prepareUpdate($data);
 		$query = "UPDATE {$this->table} SET ";
 		$query .= implode(", ", $set);
-		$query .= " WHERE ID=:id";
+		$query .= " WHERE id=:id";
 
 		$stmt = $this->db->prepare($query);
 		$stmt->bindParam(":id", $id);
@@ -72,14 +72,21 @@ abstract class Table
 		}
 	}
 
-	public function delete(array $data)
+	public function delete(int $id)
     {
 		//apaga uma tarefa no banco
 		$query = "DELETE FROM {$this->table} WHERE id=:id";
 
 		$stmt = $this->db->prepare($query);
-		$stmt->bindParam(":ID", $id);
-		$stmt->execute();
+		$stmt->bindParam(":id", $id);
+		
+		try{
+			$stmt->execute();
+			return $stmt->rowCount();
+		 } catch (\PDOException $e) {
+			 echo $e->getMessage();
+		 }
+		
 	}
 
 	
