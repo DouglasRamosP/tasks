@@ -10,5 +10,4 @@ $(document).ready(function(){
 		$('#confirm-delete').modal({show: true});
 		return false;
     });
-    
 });

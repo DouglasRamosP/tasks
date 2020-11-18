@@ -9,6 +9,7 @@ class TaskFormat
         foreach($tasklist as &$task) {
             //altero cada uma das colunas
             self::dateFormat($task['due']);
+            self::finishedFormat($task['finished']);
         }
     }
 

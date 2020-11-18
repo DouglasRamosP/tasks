@@ -20,7 +20,11 @@
 					<td><?=$taskItem['description']?></td>
 					<td><?=$taskItem['due']?></td>
 					<td><?=$taskItem['priority']?></td>
-					<td><?=$taskItem['finished']?></td>
+					<td>
+						<a href="/finish/<?=$taskItem['id']?>">
+							<?=$taskItem['finished']?> 
+						</a>
+					</td>
 					<td>
 						<a href="/edit/<?=$taskItem['id']?>" class="btn btn-warning">Editar</a>
 					</td>

@@ -95,5 +95,11 @@ class Index extends Action
 
 
 	}
+
+	public function finish()
+	{
+		$this->task->changeFinish($this->getParam());
+		$this->redirect("/index");
+	}
 	
 }
