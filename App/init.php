@@ -49,7 +49,7 @@ class Init extends Bootstrap
             'route' => '/finish',
             'controller' => 'index',
             'action' => 'finish'	
-         ];
+		 ];
 
 	    $this->setRoutes($taskRoutes);
 	}

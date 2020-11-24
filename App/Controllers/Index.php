@@ -42,11 +42,7 @@ class Index extends Action
 		{
 			$addResult = TaskResult::ADD_ERROR;
 		};
-
-		$this->redirect("/index/{$addResult}");
-
-		//$this->render('add');
-		//$this->redirect();
+		$this->redirect("/index");
 	}
 
 	public function edit()
@@ -74,6 +70,7 @@ class Index extends Action
 		}
 		
 		$this->redirect("/index/{$editResult}");
+		$this->redirect("/index");
 	}
 
 
@@ -92,6 +89,7 @@ class Index extends Action
 		}
 
 		$this->redirect("/index/{$deleteResult}");
+		$this->redirect("/index");
 
 
 	}
